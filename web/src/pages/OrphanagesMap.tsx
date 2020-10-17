@@ -79,7 +79,7 @@ function OrphanagesMap() {
                 })}
             </Map>
 
-            <Link to="/orphanage/create" className="create-orphanage">
+            <Link to="/orphanages/create" className="create-orphanage">
                 <FiPlus size={32} color="#FFF" />
             </Link>
         </div>
