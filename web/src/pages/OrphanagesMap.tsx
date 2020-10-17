@@ -9,7 +9,6 @@ import {FiPlus, FiArrowRight} from 'react-icons/fi';
 import mapMarkerImg from '../images/map-marker.svg';
 
 import api from '../services/api';
-
 import '../styles/pages/orphanages-map.css';
 
 const mapIcon = Leaflet.icon({
@@ -18,7 +17,7 @@ const mapIcon = Leaflet.icon({
     iconSize: [58, 68],
     iconAnchor: [29, 68],
     popupAnchor: [170, 2]
-});
+})
 
 interface Orphanage{
     id: number,
@@ -33,7 +32,6 @@ function OrphanagesMap() {
     useEffect(() => {
         api.get('orphanages').then(response => {
             setOrphanages(response.data);
-            console.log(response.data);
         })
     },[])
 
@@ -63,16 +61,16 @@ function OrphanagesMap() {
                     url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
                 />
 
-                {orphanages.map(orphanages => {
+                {orphanages.map(orphanage => {
                     return(
                         <Marker
-                            key={orphanages.id}
+                            key={orphanage.id}
                             icon={mapIcon}
-                            position={[orphanages.latitude,orphanages.longitude]}
+                            position={[orphanage.latitude,orphanage.longitude]}
                         >
                             <Popup closeButton={false} minWidth={240} maxWidth={240} className="map-popup">
-                                {orphanages.name}
-                                <Link to={`/orphanage/${orphanages.id}`}>
+                                {orphanage.name}
+                                <Link to={`/orphanages/:${orphanage.id}`}>
                                     <FiArrowRight size={25} color="#FFF" />
                                 </Link>
                             </Popup>
